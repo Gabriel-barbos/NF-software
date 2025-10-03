@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
-const destinatarioRoutes = require("./routes/Destinatarios");
+const destinatarioRoutes = require("./routes/destinatarios");
 const zohoRoutes = require("./services/zoho");
 const notaRoutes = require('./routes/notas')
 const app = express();
