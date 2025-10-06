@@ -42,7 +42,7 @@ function gerarNF(pedido) {
   );
 
   // Montar estrutura completa da NF-e
-  const nf = {
+ const nf = {
     ambiente: "homologacao",
     infNFe: {
       versao: "4.00",
@@ -80,11 +80,28 @@ function gerarNF(pedido) {
         }
       },
       dest,
-      det: produtos.map((p, i) => ({
-        nItem: i + 1,
-        prod: p.prod,
-        imposto: p.imposto
-      })),
+      det: produtos.map((p, i) => {
+        // Adicionar IBS e CBS na estrutura de impostos
+        const impostoCompleto = {
+          ...p.imposto,
+          IBS: p.imposto.IBS || {
+            vBC: 0.00,
+            pIBS: 0.00,
+            vIBS: 0.00
+          },
+          CBS: p.imposto.CBS || {
+            vBC: 0.00,
+            pCBS: 0.00,
+            vCBS: 0.00
+          }
+        };
+
+        return {
+          nItem: i + 1,
+          prod: p.prod,
+          imposto: impostoCompleto
+        };
+      }),
       total: {
         ICMSTot: {
           vBC: 0.00,
@@ -128,15 +145,9 @@ function gerarNF(pedido) {
     }
   };
 
-
   return nf;
 }
 
-/**
- * Salva arquivo JSON na pasta saida/ para testes
- * @param {Object} nf - JSON da NF-e
- * @param {Object} pedido - Dados do pedido
- */
 function salvarArquivoTeste(nf, pedido) {
   try {
     const clienteNome = pedido.Cadastro_Cliente?.display_value || "Cliente";
