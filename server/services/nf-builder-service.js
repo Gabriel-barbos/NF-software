@@ -4,45 +4,27 @@ const { loadJSON, sanitizeFilename } = require('./utils');
 const { montarDestinatario } = require('./nf-destinatario');
 const { normalizarProdutos } = require('./nf-produto');
 
-// Carregar dados estáticos
 const produtosCatalogo = loadJSON("../data/produtos.json");
 const defaults = loadJSON("../data/default.json");
 
-/**
- * Gera o JSON da NF-e completo
- * @param {Object} pedido - Dados do pedido com produtos e destinatário completo
- * @returns {Object} JSON da NF-e no formato da API Nuvem Fiscal
- */
 function gerarNF(pedido) {
   const { destinatario, ultimaNotaNumero } = pedido;
-  
-  if (!destinatario) {
-    throw new Error("Destinatário não fornecido no pedido");
-  }
 
-  if (ultimaNotaNumero === undefined || ultimaNotaNumero === null) {
+  if (!destinatario) throw new Error("Destinatário não fornecido no pedido");
+  if (ultimaNotaNumero === undefined || ultimaNotaNumero === null) 
     throw new Error("Número da última nota (ultimaNotaNumero) é obrigatório");
-  }
 
-  // Determinar nome do cliente para infAdic
   const nomeCliente = pedido.Cadastro_Cliente?.display_value || destinatario.Nome;
-  if (!nomeCliente) {
-    throw new Error("Nome do cliente não encontrado (Cadastro_Cliente.display_value ou destinatario.Nome)");
-  }
+  if (!nomeCliente) throw new Error("Nome do cliente não encontrado");
 
-  // Montar estrutura do destinatário
   const dest = montarDestinatario(destinatario, defaults);
-
-  // Normalizar e montar produtos
   const produtos = normalizarProdutos(pedido, destinatario, produtosCatalogo, defaults);
 
-  // Calcular totais
   const vTotalProd = parseFloat(
     produtos.reduce((acc, p) => acc + p.prod.vProd, 0).toFixed(2)
   );
 
-  // Montar estrutura completa da NF-e
- const nf = {
+  const nf = {
     ambiente: "homologacao",
     infNFe: {
       versao: "4.00",
@@ -59,7 +41,7 @@ function gerarNF(pedido) {
         tpImp: parseInt(defaults.ide.tpImp),
         tpEmis: parseInt(defaults.ide.tpEmis),
         finNFe: parseInt(defaults.ide.finNFe),
-        indFinal: (destinatario.CPF || !destinatario.CNPJ) ? 1 : 
+        indFinal: (destinatario.CPF || !destinatario.CNPJ) ? 1 :
           (dest.indIEDest === 9 ? 1 : parseInt(defaults.ide.indFinal)),
         indPres: parseInt(defaults.ide.indPres),
         indIntermed: 0,
@@ -81,15 +63,17 @@ function gerarNF(pedido) {
       },
       dest,
       det: produtos.map((p, i) => {
-        // Adicionar IBS e CBS na estrutura de impostos
+        // Montagem completa dos impostos com IBS/CBS e CST obrigatório
         const impostoCompleto = {
           ...p.imposto,
           IBS: p.imposto.IBS || {
+            CST: "00", // <<< CST obrigatório, substitua pelo correto
             vBC: 0.00,
             pIBS: 0.00,
             vIBS: 0.00
           },
           CBS: p.imposto.CBS || {
+            CST: "00", // <<< CST obrigatório, substitua pelo correto
             vBC: 0.00,
             pCBS: 0.00,
             vCBS: 0.00
@@ -145,6 +129,7 @@ function gerarNF(pedido) {
     }
   };
 
+  salvarArquivoTeste(nf, pedido);
   return nf;
 }
 
@@ -154,9 +139,7 @@ function salvarArquivoTeste(nf, pedido) {
     const clienteSanitizado = sanitizeFilename(clienteNome);
 
     const outputDir = path.join(__dirname, "../saida", clienteSanitizado);
-    if (!fs.existsSync(outputDir)) {
-      fs.mkdirSync(outputDir, { recursive: true });
-    }
+    if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
 
     const baseNome = pedido.Sub_Cliente?.display_value || pedido.Nome || "NF";
     const nomeArquivo = `${sanitizeFilename(baseNome)}_${Date.now()}.json`;
