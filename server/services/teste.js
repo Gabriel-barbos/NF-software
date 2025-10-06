@@ -88,8 +88,8 @@ const pedidoCPF = {
   ID: "PEDIDO-67890",
   ultimaNotaNumero: 1524, // Próxima nota
   destinatario: {
-    Nome: "Maria Oliveira",
-    CPF: "12345678900",
+    Nome: "GABRIEL Oliveira",
+    CPF: "04795258970",
     CNPJ: "",
     IE: "",
     Endereco: "Av. Paulista",

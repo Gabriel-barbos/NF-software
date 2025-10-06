@@ -1,0 +1,338 @@
+{
+  "ambiente": "homologacao",
+  "infNFe": {
+    "versao": "4.00",
+    "ide": {
+      "cUF": 35,
+      "natOp": "REMESSA AO COMODATO",
+      "mod": 55,
+      "serie": 1,
+      "nNF": 1526,
+      "dhEmi": "2025-10-06T18:23:28.558Z",
+      "tpNF": 1,
+      "idDest": 1,
+      "cMunFG": 3550308,
+      "tpImp": 1,
+      "tpEmis": 1,
+      "finNFe": 1,
+      "indFinal": 0,
+      "indPres": 9,
+      "indIntermed": 0,
+      "procEmi": 0,
+      "verProc": "1.0",
+      "tpAmb": 2
+    },
+    "emit": {
+      "CNPJ": "38079937000177",
+      "xNome": "Scope Brasil Ltda",
+      "IE": "130410857115",
+      "CRT": 3,
+      "enderEmit": {
+        "xLgr": "Rua Borges de Figueiredo",
+        "nro": "303",
+        "xBairro": "Mooca",
+        "cMun": 3550308,
+        "xMun": "São Paulo",
+        "UF": "SP",
+        "CEP": "03110010",
+        "cPais": 1058,
+        "xPais": "BRASIL",
+        "fone": "11974746264"
+      }
+    },
+    "dest": {
+      "CNPJ": "12345678000190",
+      "xNome": "João Silva Transportes ME",
+      "indIEDest": 1,
+      "IE": "123456789",
+      "enderDest": {
+        "xLgr": "Rua das Flores",
+        "nro": "123",
+        "xCpl": "Sala 5",
+        "xBairro": "Centro",
+        "cMun": 3550308,
+        "xMun": "São Paulo",
+        "UF": "SP",
+        "CEP": "01310100",
+        "cPais": 1058,
+        "xPais": "BRASIL",
+        "fone": "1133334444"
+      }
+    },
+    "det": [
+      {
+        "nItem": 1,
+        "prod": {
+          "cProd": "2000000000001",
+          "cEAN": "SEM GTIN",
+          "xProd": "QUECKLINK GV50",
+          "NCM": "85269100",
+          "CFOP": "5908",
+          "uCom": "UN",
+          "qCom": 2,
+          "vUnCom": 247.8,
+          "vProd": 495.6,
+          "cEANTrib": "SEM GTIN",
+          "uTrib": "UN",
+          "qTrib": 2,
+          "vUnTrib": 247.8,
+          "indTot": 1
+        },
+        "imposto": {
+          "ICMS": {
+            "ICMS00": {
+              "orig": 0,
+              "CST": "00",
+              "modBC": 3,
+              "vBC": 0,
+              "pICMS": 0,
+              "vICMS": 0
+            }
+          },
+          "PIS": {
+            "PISAliq": {
+              "CST": "01",
+              "vBC": 0,
+              "pPIS": 0,
+              "vPIS": 0
+            }
+          },
+          "COFINS": {
+            "COFINSAliq": {
+              "CST": "01",
+              "vBC": 0,
+              "pCOFINS": 0,
+              "vCOFINS": 0
+            }
+          },
+          "IBSCBS": {
+            "CST": "000",
+            "cClassTrib": "000001",
+            "gIBSCBS": {
+              "vBC": 0,
+              "gIBSUF": {
+                "pIBSUF": 0,
+                "vIBSUF": 0
+              },
+              "gIBSMun": {
+                "pIBSMun": 0,
+                "vIBSMun": 0
+              },
+              "vIBS": 0,
+              "gCBS": {
+                "pCBS": 0,
+                "vCBS": 0
+              }
+            }
+          }
+        }
+      },
+      {
+        "nItem": 2,
+        "prod": {
+          "cProd": "2000000000002",
+          "cEAN": "SEM GTIN",
+          "xProd": "CHICOTE ELÉTRICO PADRÃO",
+          "NCM": "85444200",
+          "CFOP": "5908",
+          "uCom": "UN",
+          "qCom": 2,
+          "vUnCom": 17,
+          "vProd": 34,
+          "cEANTrib": "SEM GTIN",
+          "uTrib": "UN",
+          "qTrib": 2,
+          "vUnTrib": 17,
+          "indTot": 1
+        },
+        "imposto": {
+          "ICMS": {
+            "ICMS00": {
+              "orig": 0,
+              "CST": "00",
+              "modBC": 3,
+              "vBC": 0,
+              "pICMS": 0,
+              "vICMS": 0
+            }
+          },
+          "PIS": {
+            "PISAliq": {
+              "CST": "01",
+              "vBC": 0,
+              "pPIS": 0,
+              "vPIS": 0
+            }
+          },
+          "COFINS": {
+            "COFINSAliq": {
+              "CST": "01",
+              "vBC": 0,
+              "pCOFINS": 0,
+              "vCOFINS": 0
+            }
+          },
+          "IBSCBS": {
+            "CST": "000",
+            "cClassTrib": "000001",
+            "gIBSCBS": {
+              "vBC": 0,
+              "gIBSUF": {
+                "pIBSUF": 0,
+                "vIBSUF": 0
+              },
+              "gIBSMun": {
+                "pIBSMun": 0,
+                "vIBSMun": 0
+              },
+              "vIBS": 0,
+              "gCBS": {
+                "pCBS": 0,
+                "vCBS": 0
+              }
+            }
+          }
+        }
+      },
+      {
+        "nItem": 3,
+        "prod": {
+          "cProd": "2000000000007",
+          "cEAN": "SEM GTIN",
+          "xProd": "I-BUTTON PRETO",
+          "NCM": "85437099",
+          "CFOP": "5908",
+          "uCom": "UN",
+          "qCom": 2,
+          "vUnCom": 10,
+          "vProd": 20,
+          "cEANTrib": "SEM GTIN",
+          "uTrib": "UN",
+          "qTrib": 2,
+          "vUnTrib": 10,
+          "indTot": 1
+        },
+        "imposto": {
+          "ICMS": {
+            "ICMS00": {
+              "orig": 0,
+              "CST": "00",
+              "modBC": 3,
+              "vBC": 0,
+              "pICMS": 0,
+              "vICMS": 0
+            }
+          },
+          "PIS": {
+            "PISAliq": {
+              "CST": "01",
+              "vBC": 0,
+              "pPIS": 0,
+              "vPIS": 0
+            }
+          },
+          "COFINS": {
+            "COFINSAliq": {
+              "CST": "01",
+              "vBC": 0,
+              "pCOFINS": 0,
+              "vCOFINS": 0
+            }
+          },
+          "IBSCBS": {
+            "CST": "000",
+            "cClassTrib": "000001",
+            "gIBSCBS": {
+              "vBC": 0,
+              "gIBSUF": {
+                "pIBSUF": 0,
+                "vIBSUF": 0
+              },
+              "gIBSMun": {
+                "pIBSMun": 0,
+                "vIBSMun": 0
+              },
+              "vIBS": 0,
+              "gCBS": {
+                "pCBS": 0,
+                "vCBS": 0
+              }
+            }
+          }
+        }
+      }
+    ],
+    "total": {
+      "ICMSTot": {
+        "vBC": 0,
+        "vICMS": 0,
+        "vICMSDeson": 0,
+        "vFCP": 0,
+        "vBCST": 0,
+        "vST": 0,
+        "vFCPST": 0,
+        "vFCPSTRet": 0,
+        "vProd": 549.6,
+        "vFrete": 0,
+        "vSeg": 0,
+        "vDesc": 0,
+        "vII": 0,
+        "vIPI": 0,
+        "vIPIDevol": 0,
+        "vPIS": 0,
+        "vCOFINS": 0,
+        "vOutro": 0,
+        "vNF": 549.6,
+        "vTotTrib": 0
+      },
+      "IBSCBSTot": {
+        "vBCIBSCBS": 0,
+        "gIBS": {
+          "gIBSUF": {
+            "vDif": 0,
+            "vDevTrib": 0,
+            "vIBSUF": 0
+          },
+          "gIBSMun": {
+            "vDif": 0,
+            "vDevTrib": 0,
+            "vIBSMun": 0
+          },
+          "vIBS": 0,
+          "vCredPres": 0,
+          "vCredPresCondSus": 0
+        },
+        "gCBS": {
+          "vDif": 0,
+          "vDevTrib": 0,
+          "vCBS": 0,
+          "vCredPres": 0,
+          "vCredPresCondSus": 0
+        },
+        "gMono": {
+          "vIBSMono": 0,
+          "vCBSMono": 0,
+          "vIBSMonoReten": 0,
+          "vCBSMonoReten": 0,
+          "vIBSMonoRet": 0,
+          "vCBSMonoRet": 0
+        }
+      }
+    },
+    "transp": {
+      "modFrete": 9
+    },
+    "pag": {
+      "detPag": [
+        {
+          "indPag": 0,
+          "tPag": "90",
+          "vPag": 0
+        }
+      ]
+    },
+    "infAdic": {
+      "infCpl": "Nota emitida para envio ao cliente: João Silva Transportes ME"
+    }
+  }
+}

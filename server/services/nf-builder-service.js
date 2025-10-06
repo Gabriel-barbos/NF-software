@@ -63,20 +63,27 @@ function gerarNF(pedido) {
       },
       dest,
       det: produtos.map((p, i) => {
-        // Montagem completa dos impostos com IBS/CBS e CST obrigatório
         const impostoCompleto = {
           ...p.imposto,
-          IBS: p.imposto.IBS || {
-            CST: "00", // <<< CST obrigatório, substitua pelo correto
-            vBC: 0.00,
-            pIBS: 0.00,
-            vIBS: 0.00
-          },
-          CBS: p.imposto.CBS || {
-            CST: "00", // <<< CST obrigatório, substitua pelo correto
-            vBC: 0.00,
-            pCBS: 0.00,
-            vCBS: 0.00
+          IBSCBS: p.imposto.IBSCBS || {
+            CST: "000",
+            cClassTrib: "000001",
+            gIBSCBS: {
+              vBC: 0.00,
+              gIBSUF: {
+                pIBSUF: 0.00,
+                vIBSUF: 0.00
+              },
+              gIBSMun: {
+                pIBSMun: 0.00,
+                vIBSMun: 0.00
+              },
+              vIBS: 0.00,
+              gCBS: {
+                pCBS: 0.00,
+                vCBS: 0.00
+              }
+            }
           }
         };
 
@@ -108,6 +115,39 @@ function gerarNF(pedido) {
           vOutro: 0.00,
           vNF: vTotalProd,
           vTotTrib: 0.00
+        },
+        IBSCBSTot: {
+          vBCIBSCBS: 0.00,
+          gIBS: {
+            gIBSUF: {
+              vDif: 0.00,
+              vDevTrib: 0.00,
+              vIBSUF: 0.00
+            },
+            gIBSMun: {
+              vDif: 0.00,
+              vDevTrib: 0.00,
+              vIBSMun: 0.00
+            },
+            vIBS: 0.00,
+            vCredPres: 0.00,
+            vCredPresCondSus: 0.00
+          },
+          gCBS: {
+            vDif: 0.00,
+            vDevTrib: 0.00,
+            vCBS: 0.00,
+            vCredPres: 0.00,
+            vCredPresCondSus: 0.00
+          },
+          gMono: {
+            vIBSMono: 0.00,
+            vCBSMono: 0.00,
+            vIBSMonoReten: 0.00,
+            vCBSMonoReten: 0.00,
+            vIBSMonoRet: 0.00,
+            vCBSMonoRet: 0.00
+          }
         }
       },
       transp: {
