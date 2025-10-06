@@ -169,7 +169,7 @@ function gerarNF(pedido) {
     }
   };
 
-  salvarArquivoTeste(nf, pedido);
+  // salvarArquivoTeste(nf, pedido);
   return nf;
 }
 
