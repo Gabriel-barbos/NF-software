@@ -1,8 +1,8 @@
 const fetch = require('node-fetch');
 
 const CONFIG = {
-  CLIENT_ID: process.env.NUVEM_FISCAL_CLIENT_ID || "PXErFLU0QKAyPtVINDEV",
-  CLIENT_SECRET: process.env.NUVEM_FISCAL_CLIENT_SECRET || "ZWaJPVwLYIbQBAz0acoLvHHNXKPSbT8WqzSH9ipe",
+  CLIENT_ID: process.env.NUVEM_FISCAL_CLIENT_ID || "Ypw1yFRR2tCHqyrx5YVR",
+  CLIENT_SECRET: process.env.NUVEM_FISCAL_CLIENT_SECRET || "N6wyZStdtvQceilcNqYOfsTvVgUhC4cjqS8ueGz9",
   AMBIENTE: process.env.NUVEM_FISCAL_AMBIENTE || "sandbox",
   
   get AUTH_URL() {
