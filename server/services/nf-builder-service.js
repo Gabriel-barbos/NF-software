@@ -144,7 +144,7 @@ function gerarNF(pedido) {
             vIBSMono: 0.00,
             vCBSMono: 0.00,
             vIBSMonoReten: 0.00,
-            vCBSMonoReten: 0.00,
+            vCBSMonoReten: 0.00, 
             vIBSMonoRet: 0.00,
             vCBSMonoRet: 0.00
           }
