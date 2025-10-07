@@ -6,6 +6,7 @@ const produtoMap = {
   // Chicotes
   "Teltonika Com Bloqueio + I-Button": ["Chicote Elétrico Padrão", "I-BUTTON PRETO", "LEITOR I-BUTTON"],
   "2G - Sem Bloqueio": ["Chicote Elétrico Padrão"],
+  "2G - Com Bloqueio": ["Chicote Elétrico Padrão"],
   "2G - Com Bloqueio CAOA": ["Chicote Elétrico Padrão"],
   "2G - Com Bloqueio Padrão": ["Chicote Elétrico Padrão"],
   "2G - Com Bloqueio Padrão + RFID + Buzzer": ["Chicote Elétrico Padrão", "LEITOR DE CARTÃO RFID"],

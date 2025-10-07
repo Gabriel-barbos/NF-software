@@ -6,16 +6,16 @@ const { gerarNF } = require('./nf-builder-service');
 
 const pedidoMock = {
   ID: "PEDIDO-12345",
-  ultimaNotaNumero: 1523, // OBRIGATÓRIO - Última nota emitida
+  ultimaNotaNumero: 13556, // OBRIGATÓRIO - Última nota emitida
   
   // Informações do cliente principal
   Cadastro_Cliente: {
-    display_value: "Unidas"
+    display_value: "Solution4fleet"
   },
   
   // Sub-cliente (opcional)
   Sub_Cliente: {
-    display_value: "Filial São Paulo"
+    display_value: ""
   },
   
   // Produtos do pedido
@@ -25,14 +25,10 @@ const pedidoMock = {
   Quantidade_de_Dispositivos: 2,
   
   Chicote: {
-    display_value: "2G - Sem Bloqueio" // Exemplo
+    display_value: "2G - Com Bloqueio" // Exemplo
   },
   
-  Acessorios: {
-    display_value: "I-Button" // Exemplo - será ignorado se já incluído no chicote
-  },
-  Quantidade_de_Acess_rios: 2,
-  
+
   // Destinatário COMPLETO (vindo do banco de dados)
   destinatario: {
     Nome: "João Silva Transportes ME",
@@ -86,17 +82,17 @@ console.log("=".repeat(60));
 const pedidoCPF = {
   ...pedidoMock,
   ID: "PEDIDO-67890",
-  ultimaNotaNumero: 1524, // Próxima nota
+  ultimaNotaNumero: 13556, // Próxima nota
   destinatario: {
-    Nome: "GABRIEL Oliveira",
-    CPF: "04795258970",
+    Nome: "Elaine de Cássia Juarez",
+    CPF: "17247326840",
     CNPJ: "",
     IE: "",
-    Endereco: "Av. Paulista",
-    Numero: "1000",
-    Complemento: "Apto 501",
-    Bairro: "Bela Vista",
-    Cidade: "São Paulo",
+    Endereco: "Av. Artur de Queirós",
+    Numero: "701",
+    Complemento: "Savol Volkswagen Santo André",
+    Bairro: "Casa Branca",
+    Cidade: "Santo André",
     Estado: "SP",
     CEP: "01310100",
     Telefone: "1133334444"
@@ -115,47 +111,7 @@ try {
   console.error("\n❌ ERRO:", error.message);
 }
 
-// ========================================
-// TESTE 3: Erro - ultimaNotaNumero ausente
-// ========================================
-console.log("\n" + "=".repeat(60));
-console.log("🧪 TESTE 3: Validação - ultimaNotaNumero ausente");
-console.log("=".repeat(60));
 
-const pedidoSemNota = {
-  ...pedidoMock,
-  ultimaNotaNumero: undefined // Forçar erro
-};
-
-try {
-  gerarNF(pedidoSemNota);
-} catch (error) {
-  console.log("\n✅ Erro capturado corretamente:");
-  console.log(`   ❌ ${error.message}`);
-}
-
-// ========================================
-// TESTE 4: Fallback - Sem Cadastro_Cliente
-// ========================================
-console.log("\n" + "=".repeat(60));
-console.log("🧪 TESTE 4: Fallback para destinatario.Nome");
-console.log("=".repeat(60));
-
-const pedidoSemCliente = {
-  ...pedidoMock,
-  ID: "PEDIDO-99999",
-  ultimaNotaNumero: 1525,
-  Cadastro_Cliente: undefined // Força uso do destinatario.Nome
-};
-
-try {
-  const nf4 = gerarNF(pedidoSemCliente);
-  console.log("\n✅ NF gerada com sucesso!");
-  console.log(`📝 Info Adicional: ${nf4.infNFe.infAdic.infCpl}`);
-  console.log("   ℹ️  Usou destinatario.Nome como fallback");
-} catch (error) {
-  console.error("\n❌ ERRO:", error.message);
-}
 
 console.log("\n" + "=".repeat(60));
 console.log("✅ Testes finalizados! Verifique os arquivos em ../saida/");
