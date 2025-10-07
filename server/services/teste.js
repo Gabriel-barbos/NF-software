@@ -6,11 +6,11 @@ const { gerarNF } = require('./nf-builder-service');
 
 const pedidoMock = {
   ID: "PEDIDO-12345",
-  ultimaNotaNumero: 13556, // OBRIGATÓRIO - Última nota emitida
+  ultimaNotaNumero: 13557, // OBRIGATÓRIO - Última nota emitida
   
   // Informações do cliente principal
   Cadastro_Cliente: {
-    display_value: "Solution4fleet"
+    display_value: "CAOA"
   },
   
   // Sub-cliente (opcional)
@@ -22,10 +22,10 @@ const pedidoMock = {
   Dispositivo: {
     display_value: "GV50" // Exemplo - ajuste conforme seu sistema
   },
-  Quantidade_de_Dispositivos: 2,
+  Quantidade_de_Dispositivos: 1,
   
   Chicote: {
-    display_value: "2G - Com Bloqueio" // Exemplo
+    display_value: "2G - Sem Bloqueio" // Exemplo
   },
   
 
@@ -82,19 +82,19 @@ console.log("=".repeat(60));
 const pedidoCPF = {
   ...pedidoMock,
   ID: "PEDIDO-67890",
-  ultimaNotaNumero: 13556, // Próxima nota
+  ultimaNotaNumero: 13557, // Próxima nota
   destinatario: {
-    Nome: "Elaine de Cássia Juarez",
-    CPF: "17247326840",
+    Nome: "Janiel de Oliveira Barreto",
+    CPF: "70886001102",
     CNPJ: "",
     IE: "",
-    Endereco: "Av. Artur de Queirós",
-    Numero: "701",
-    Complemento: "Savol Volkswagen Santo André",
-    Bairro: "Casa Branca",
-    Cidade: "Santo André",
+    Endereco: "R. São José",
+    Numero: "10",
+    Complemento: "Travessa A casa 10",
+    Bairro: "Embaré",
+    Cidade: "Santos",
     Estado: "SP",
-    CEP: "01310100",
+    CEP: "11040200",
     Telefone: "1133334444"
   }
 };

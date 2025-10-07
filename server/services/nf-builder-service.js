@@ -52,7 +52,7 @@ function gerarNF(pedido) {
         mod: parseInt(defaults.ide.mod),
         serie: parseInt(defaults.ide.serie),
         nNF: parseInt(ultimaNotaNumero) + 1,
-        dhEmi: getDataHoraEmissao(), // ✅ data/hora corrigida
+        dhEmi: getDataHoraEmissao(), 
         tpNF: parseInt(defaults.ide.tpNF),
         idDest:
           destinatario.Estado === defaults.emit.enderEmit.UF ? 1 : 2,
@@ -85,37 +85,11 @@ function gerarNF(pedido) {
         },
       },
       dest,
-      det: produtos.map((p, i) => {
-        const impostoCompleto = {
-          ...p.imposto,
-          IBSCBS: p.imposto.IBSCBS || {
-            CST: "000",
-            cClassTrib: "000001",
-            gIBSCBS: {
-              vBC: 0.0,
-              gIBSUF: {
-                pIBSUF: 0.0,
-                vIBSUF: 0.0,
-              },
-              gIBSMun: {
-                pIBSMun: 0.0,
-                vIBSMun: 0.0,
-              },
-              vIBS: 0.0,
-              gCBS: {
-                pCBS: 0.0,
-                vCBS: 0.0,
-              },
-            },
-          },
-        };
-
-        return {
-          nItem: i + 1,
-          prod: p.prod,
-          imposto: impostoCompleto,
-        };
-      }),
+      det: produtos.map((p, i) => ({
+        nItem: i + 1,
+        prod: p.prod,
+        imposto: p.imposto,
+      })),
       total: {
         ICMSTot: {
           vBC: 0.0,
@@ -163,6 +137,7 @@ function gerarNF(pedido) {
   // salvarArquivoTeste(nf, pedido);
   return nf;
 }
+
 
 function salvarArquivoTeste(nf, pedido) {
   try {
