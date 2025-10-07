@@ -4,7 +4,11 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const destinatarioRoutes = require("./routes/destinatarios");
 const zohoRoutes = require("./services/zoho");
-const notaRoutes = require('./routes/notas')
+const notaRoutes = require('./routes/notas');
+const testNuvemFiscalRoutes = require("./routes/testeNuvemFiscal");
+
+const { CONFIG } = require('./services/nuvemfiscal'); // ✅ Importa CONFIG
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -15,7 +19,6 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// Middleware
 app.use(express.json());
 
 // Conexão MongoDB
@@ -29,9 +32,15 @@ mongoose.connect(process.env.MONGO_URI, {
 // Rotas
 app.use("/destinatarios", destinatarioRoutes);
 app.use("/zoho", zohoRoutes);
-app.use("/nota", notaRoutes)
+app.use("/nota", notaRoutes);
+app.use("/test-nuvemfiscal", testNuvemFiscalRoutes);
 
 // Teste básico
 app.get("/", (req, res) => res.send("API de Destinatários funcionando ✅"));
 
 app.listen(PORT, () => console.log(`🚀 Servidor rodando na porta ${PORT}`));
+
+// Logs de ambiente da Nuvem Fiscal
+console.log("🚀 Ambiente ativo:", CONFIG.AMBIENTE);
+console.log("🔗 URL API:", CONFIG.API_URL);
+console.log("🚀 Ambiente ativo:", process.env.NUVEM_FISCAL_AMBIENTE);
