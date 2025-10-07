@@ -58,6 +58,7 @@ const produtoMap = {
   "Leitor RFID SGBrás + Cartão": ["LEITOR DE CARTÃO MAGNÉTICO DR102", "CARTÃO RFID 2"],
   "Mister S": ["SA MISTER S GV50"],
   "Scotchlock": [], 
+  "Scotchlock (conector fio)": [], 
   "Sem Acessórios": [] 
 };
 
