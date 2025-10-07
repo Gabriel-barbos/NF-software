@@ -111,49 +111,87 @@ function padronizarCNPJ(cnpj) {
   return (cnpj || "").replace(/\D/g, "").padStart(14, "0");
 }
 
+/**
+ * Normaliza texto para comparação (remove acentos, maiúsculas, espaços extras)
+ */
+function normalizarTexto(texto) {
+  if (!texto) return '';
+  return texto
+    .toString()
+    .toUpperCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/**
+ * Busca o código IBGE do município
+ * @param {string} cidade - Nome da cidade
+ * @param {string} uf - UF (sigla do estado em 2 letras)
+ * @returns {string} Código IBGE de 7 dígitos
+ */
 function obterCodigoIBGE(cidade, uf) {
   const municipiosIBGE = loadJSON("ibge.json");
   
-  if (!cidade || !uf) return "3550308";
-
-  const cidadeNormalizada = cidade
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toUpperCase()
-    .trim();
-
-  const municipio = municipiosIBGE.find(m => {
-    const nomeNormalizado = m.nome
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .toUpperCase()
-      .trim();
-
-    return nomeNormalizado === cidadeNormalizada;
-  });
-
-  if (municipio) {
-    return municipio.codigo_ibge.toString();
+  if (!cidade || !uf) {
+    throw new Error(`Cidade ou UF inválida: ${cidade}/${uf}`);
   }
 
+  const cidadeNorm = normalizarTexto(cidade);
+  const ufUpper = uf.toUpperCase().trim();
+
+  // Mapeamento correto de código UF
   const codigosUF = {
-    "AC": 12, "AL": 17, "AP": 16, "AM": 13, "BA": 29, "CE": 23, "DF": 53,
-    "ES": 32, "GO": 52, "MA": 21, "MT": 51, "MS": 50, "MG": 31, "PA": 15,
-    "PB": 25, "PR": 41, "PE": 26, "PI": 22, "RJ": 33, "RN": 24, "RS": 43,
-    "RO": 11, "RR": 14, "SC": 42, "SP": 35, "SE": 28, "TO": 17
+    'AC': 12, 'AL': 27, 'AP': 16, 'AM': 13, 'BA': 29, 'CE': 23,
+    'DF': 53, 'ES': 32, 'GO': 52, 'MA': 21, 'MT': 51, 'MS': 50,
+    'MG': 31, 'PA': 15, 'PB': 25, 'PR': 41, 'PE': 26, 'PI': 22,
+    'RJ': 33, 'RN': 24, 'RS': 43, 'RO': 11, 'RR': 14, 'SC': 42,
+    'SP': 35, 'SE': 28, 'TO': 17
   };
 
-  const codigoUF = codigosUF[uf];
-  if (codigoUF) {
-    const capital = municipiosIBGE.find(m =>
-      m.codigo_uf === codigoUF && m.capital === 1
-    );
-    if (capital) {
-      return capital.codigo_ibge.toString();
-    }
+  const codigoUF = codigosUF[ufUpper];
+  if (!codigoUF) {
+    throw new Error(`UF inválida: ${ufUpper}`);
   }
 
-  return "3550308";
+  // 1ª Busca: Exata (nome normalizado + codigo_uf)
+  let municipio = municipiosIBGE.find(m => 
+    normalizarTexto(m.nome) === cidadeNorm && 
+    m.codigo_uf === codigoUF
+  );
+
+  // 2ª Busca: Aproximada (remove palavras comuns)
+  if (!municipio) {
+    const cidadeLimpa = cidadeNorm
+      .replace(/\b(DE|DO|DA|DOS|DAS|E)\b/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    municipio = municipiosIBGE.find(m => {
+      const nomeLimpo = normalizarTexto(m.nome)
+        .replace(/\b(DE|DO|DA|DOS|DAS|E)\b/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+      return nomeLimpo === cidadeLimpa && m.codigo_uf === codigoUF;
+    });
+  }
+
+  // 3ª Busca: Parcial (contém o nome)
+  if (!municipio) {
+    municipio = municipiosIBGE.find(m => 
+      normalizarTexto(m.nome).includes(cidadeNorm) && 
+      m.codigo_uf === codigoUF
+    );
+  }
+
+  if (!municipio) {
+    throw new Error(
+      `Município não encontrado no IBGE: ${cidade}/${ufUpper} (Código UF: ${codigoUF})`
+    );
+  }
+
+  return municipio.codigo_ibge.toString();
 }
 
 function limparTextoNFe(texto) {
@@ -168,9 +206,9 @@ function limparTextoNFe(texto) {
 
 function sanitizeFilename(str) {
   return str
-    .normalize("NFD") // remove acentos
+    .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-zA-Z0-9-_]/g, "_"); // só letras, números, hífen e underline
+    .replace(/[^a-zA-Z0-9-_]/g, "_");
 }
 
 module.exports = {
@@ -184,6 +222,7 @@ module.exports = {
   padronizarCPF,
   padronizarCNPJ,
   obterCodigoIBGE,
+  normalizarTexto,
   limparTextoNFe,
   sanitizeFilename
 };
