@@ -25,7 +25,7 @@ function gerarNF(pedido) {
   );
 
   const nf = {
-    ambiente: "homologacao",
+    ambiente: "producao",
     infNFe: {
       versao: "4.00",
       ide: {
