@@ -13,6 +13,7 @@ const produtoMap = {
   "2G - Com Bloqueio Padrão 24V": ["Chicote Elétrico Padrão"],
   "4G - Com Bloqueio + Buzzer": ["Chicote Elétrico Padrão"],
   "2G - Sem Bloqueio + Buzzer": ["Chicote Elétrico Padrão"],
+  " 2G - Sem bloqueio + Buzzer": ["Chicote Elétrico Padrão"],
   "2G - Com Bloqueio + Buzzer": ["Chicote Elétrico Padrão"],
   "4G - Com Bloqueio Padrão": ["Chicote Elétrico Padrão"],
   "4G - Com Bloqueio Padrão 24V": ["Chicote Elétrico Padrão"],
