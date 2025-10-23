@@ -7,15 +7,13 @@ const { normalizarProdutos } = require("./nf-produto");
 const produtosCatalogo = loadJSON("../data/produtos.json");
 const defaults = loadJSON("../data/default.json");
 
-/**
- * Gera a data/hora no formato ISO da NFe com fuso -03:00
- * Exemplo: 2025-10-07T14:30:45-03:00
- */
+
+
 function getDataHoraEmissao() {
   const agora = new Date();
-  const tzOffset = -3 * 60; // Brasília -03:00
+  const tzOffset = -3 * 60; 
   const localTime = new Date(agora.getTime() + tzOffset * 60 * 1000);
-  const iso = localTime.toISOString().split(".")[0]; // remove ms
+  const iso = localTime.toISOString().split(".")[0]; 
   return `${iso}-03:00`;
 }
 

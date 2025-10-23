@@ -7,10 +7,9 @@ const {
 } = require('./utils');
 
 /**
- * Monta a estrutura do destinatário para a NF-e
- * @param {Object} d - Dados do destinatário
- * @param {Object} defaults - Configurações padrão
- * @returns {Object} Estrutura do destinatário formatada
+ * @param {Object} d 
+ * @param {Object} defaults 
+ * @returns {Object} 
  */
 function montarDestinatario(d, defaults) {
   // Validações básicas

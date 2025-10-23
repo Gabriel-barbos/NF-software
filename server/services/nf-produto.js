@@ -5,7 +5,6 @@ const {
 } = require('./utils');
 
 /**
- * Normaliza e monta os produtos do pedido para a NF-e
  * @param {Object} pedido - Dados do pedido
  * @param {Object} destinatario - Dados do destinatário
  * @param {Array} produtosCatalogo - Catálogo de produtos
@@ -44,8 +43,13 @@ function normalizarProdutos(pedido, destinatario, produtosCatalogo, defaults) {
   // Processar chicote
   const chicote = getDisplayValue(pedido.Chicote);
   if (chicote) {
+    //  Se não há dispositivo, usar quantidade de acessórios
+    const quantidadeChicote = dispositivo 
+      ? parseInt(pedido.Quantidade_de_Dispositivos || 1)
+      : parseInt(pedido.Quantidade_de_Acess_rios || 1);
+    
     aplicarConversao(chicote).forEach(nome =>
-      addProduto(nome, parseInt(pedido.Quantidade_de_Dispositivos || 1), "Chicote")
+      addProduto(nome, quantidadeChicote, "Chicote")
     );
   }
 
