@@ -34,6 +34,7 @@ const produtoMap = {
   "Teltonika SEM Bloqueio + I-Button + Buzzer": ["I-BUTTON PRETO", "LEITOR I-BUTTON"],
   "X3Tech Com Bloqueio Padrão": ["Chicote Elétrico Padrão"],
   "X3Tech Com Bloqueio Unidas": ["Chicote Elétrico Padrão"],
+  "X3Tech Sem Bloqueio Padrão": ["Chicote Elétrico Padrão"],
 
   // Dispositivos
   "GV50": ["QUECKLINK GV50"],
